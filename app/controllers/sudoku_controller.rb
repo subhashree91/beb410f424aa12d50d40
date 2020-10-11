@@ -70,10 +70,12 @@ class SudokuController < ApplicationController
     empty.empty?
   end
 
-  sudoku = Sudoku.new
-  9.times do |y|
-    gets.chop.split('').each_with_index do |value,x|
-      sudoku[x,y] = value.to_i unless value == '-'
+  def create
+    sudoku = Sudoku.new
+    9.times do |y|
+      gets.chop.split('').each_with_index do |value,x|
+        sudoku[x,y] = value.to_i unless value == '-'
+      end
     end
   end
 
@@ -95,10 +97,11 @@ class SudokuController < ApplicationController
     return  false
   end
 
-  if solve(sudoku)
-    puts sudoku
-  else
-    puts "unsolved"
+  def show
+    if solve(sudoku)
+      puts sudoku
+    else
+      puts "unsolved"
+    end
   end
-
 end
